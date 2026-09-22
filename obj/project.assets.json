@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mateusz\\Documents\\Antigravity\\projects\\2.1-nazwa-aplikacji-4tc-2-mateusz-t\\PasswordGenerator.csproj",
+      "projectUniqueName": "C:\\Users\\Mateusz\\Documents\\Antigravity\\projects\\2.1-generator-hasel-4tc-2-mateusz-t\\PasswordGenerator.csproj",
       "projectName": "PasswordGenerator",
-      "projectPath": "C:\\Users\\Mateusz\\Documents\\Antigravity\\projects\\2.1-nazwa-aplikacji-4tc-2-mateusz-t\\PasswordGenerator.csproj",
+      "projectPath": "C:\\Users\\Mateusz\\Documents\\Antigravity\\projects\\2.1-generator-hasel-4tc-2-mateusz-t\\PasswordGenerator.csproj",
       "packagesPath": "C:\\Users\\Mateusz\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mateusz\\Documents\\Antigravity\\projects\\2.1-nazwa-aplikacji-4tc-2-mateusz-t\\obj\\",
+      "outputPath": "C:\\Users\\Mateusz\\Documents\\Antigravity\\projects\\2.1-generator-hasel-4tc-2-mateusz-t\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
