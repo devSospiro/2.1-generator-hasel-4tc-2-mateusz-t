@@ -124,9 +124,14 @@
                           helpers:SmoothScrollHelper.IsSmoothScrollEnabled="True"
                           VerticalScrollBarVisibility="Auto"
                           HorizontalScrollBarVisibility="Disabled"
+                          CanContentScroll="False"
+                          Focusable="False"
                           Padding="20,0,16,16"
                           Margin="0,0,4,8">
                 <StackPanel>
+                    <StackPanel.CacheMode>
+                        <BitmapCache EnableClearType="True" />
+                    </StackPanel.CacheMode>
 
                     <!-- KARTA 1: WYGENEROWANE HASŁO -->
                     <Border Style="{StaticResource ModernCardStyle}">
@@ -150,66 +155,69 @@
                                 </Border>
                             </Grid>
 
-                            <!-- Pole z hasłem i przyciskami kopiowania / odświeżenia -->
-                            <Border Background="{DynamicResource InputBackgroundBrush}"
-                                    BorderBrush="{DynamicResource BorderBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="10"
-                                    Padding="12,8"
-                                    Margin="0,0,0,14">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
+                            <!-- Pole z hasłem i kwadratowy przycisk Generuj obok paska -->
+                            <Grid Margin="0,0,0,14">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-                                    <!-- Tekst hasła (z możliwością zaznaczenia) -->
-                                    <TextBox Text="{Binding DisplayedPassword, Mode=OneWay}"
-                                             IsReadOnly="True"
-                                             Background="Transparent"
-                                             Foreground="{DynamicResource TextPrimaryBrush}"
-                                             FontFamily="Consolas, Cascadia Code, Courier New"
-                                             FontSize="19"
-                                             FontWeight="Bold"
-                                             BorderThickness="0"
-                                             VerticalAlignment="Center"
-                                             TextWrapping="Wrap"
-                                             IsTabStop="False"
-                                             Cursor="Hand" />
+                                <Border Background="{DynamicResource InputBackgroundBrush}"
+                                        BorderBrush="{DynamicResource BorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="10"
+                                        Padding="12,8"
+                                        Margin="0,0,8,0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
 
-                                    <!-- Przyciski akcji: Pokaż/Ukryj, Kopiuj, Odśwież -->
-                                    <StackPanel Grid.Column="1"
-                                                Orientation="Horizontal"
-                                                VerticalAlignment="Center"
-                                                Margin="6,0,0,0">
-                                        <!-- Przełącznik widoczności (Oko) -->
-                                        <Button Style="{StaticResource IconActionButtonStyle}"
-                                                Command="{Binding TogglePasswordVisibilityCommand}"
-                                                ToolTip="Pokaż / ukryj znaki hasła"
-                                                Width="32" Height="32"
-                                                Margin="0,0,4,0">
-                                            <TextBlock Text="{Binding VisibilityIcon}" FontSize="13" />
-                                        </Button>
+                                        <!-- Tekst hasła (z możliwością zaznaczenia) -->
+                                        <TextBox Text="{Binding DisplayedPassword, Mode=OneWay}"
+                                                 IsReadOnly="True"
+                                                 Background="Transparent"
+                                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                                 FontFamily="Consolas, Cascadia Code, Courier New"
+                                                 FontSize="19"
+                                                 FontWeight="Bold"
+                                                 BorderThickness="0"
+                                                 VerticalAlignment="Center"
+                                                 TextWrapping="Wrap"
+                                                 IsTabStop="False"
+                                                 Cursor="Hand" />
 
-                                        <!-- Kopiuj -->
-                                        <Button Style="{StaticResource IconActionButtonStyle}"
-                                                Command="{Binding CopyCommand}"
-                                                ToolTip="Kopiuj hasło do schowka"
-                                                Width="32" Height="32"
-                                                Margin="0,0,4,0">
-                                            <TextBlock Text="📋" FontSize="13" />
-                                        </Button>
+                                        <!-- Przyciski akcji: Pokaż/Ukryj, Kopiuj -->
+                                        <StackPanel Grid.Column="1"
+                                                    Orientation="Horizontal"
+                                                    VerticalAlignment="Center"
+                                                    Margin="6,0,0,0">
+                                            <Button Style="{StaticResource IconActionButtonStyle}"
+                                                    Command="{Binding TogglePasswordVisibilityCommand}"
+                                                    ToolTip="Pokaż / ukryj znaki hasła"
+                                                    Width="32" Height="32"
+                                                    Margin="0,0,4,0">
+                                                <TextBlock Text="{Binding VisibilityIcon}" FontSize="13" />
+                                            </Button>
 
-                                        <!-- Odśwież / Generuj -->
-                                        <Button Style="{StaticResource IconActionButtonStyle}"
-                                                Command="{Binding GenerateCommand}"
-                                                ToolTip="Wylosuj nowe hasło"
-                                                Width="32" Height="32">
-                                            <TextBlock Text="🔄" FontSize="13" />
-                                        </Button>
-                                    </StackPanel>
-                                </Grid>
-                            </Border>
+                                            <Button Style="{StaticResource IconActionButtonStyle}"
+                                                    Command="{Binding CopyCommand}"
+                                                    ToolTip="Kopiuj hasło do schowka"
+                                                    Width="32" Height="32">
+                                                <TextBlock Text="📋" FontSize="13" />
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+
+                                <Button Grid.Column="1"
+                                        Style="{StaticResource SquareGenerateButtonStyle}"
+                                        Command="{Binding GenerateCommand}"
+                                        VerticalAlignment="Center">
+                                    <TextBlock Text="↻" FontSize="22" FontWeight="Bold" />
+                                </Button>
+                            </Grid>
 
                             <!-- WSKAŹNIK SIŁY HASŁA -->
                             <Grid Margin="0,0,0,6">
@@ -410,16 +418,6 @@
                             </CheckBox>
                         </StackPanel>
                     </Border>
-
-                    <!-- PRZYCISK GŁÓWNY: GENERUJ NOWE HASŁO -->
-                    <Button Style="{StaticResource PrimaryActionButtonStyle}"
-                            Command="{Binding GenerateCommand}"
-                            Margin="0,0,0,16">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="⚡" FontSize="18" Margin="0,0,8,0" VerticalAlignment="Center" />
-                            <TextBlock Text="Generuj nowe hasło" FontSize="15" FontWeight="SemiBold" VerticalAlignment="Center" />
-                        </StackPanel>
-                    </Button>
 
                     <!-- SEKCJA: OSTATNIO WYGENEROWANE HASŁA (HISTORIA) -->
                     <Expander Header="Historia haseł z tej sesji"
